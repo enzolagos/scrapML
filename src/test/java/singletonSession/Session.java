@@ -4,6 +4,7 @@ import factoryBrowser.FactoryBrowser;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import utils.GetProperties;
 
 import java.time.Duration;
 
@@ -12,7 +13,7 @@ public class Session {
     private WebDriver browser;
 
     private Session(){
-        browser = FactoryBrowser.make("chrome").create();
+        browser = FactoryBrowser.make(GetProperties.getInstance().getBrowser()).create();
     }
     public static Session getInstance(){
         if(session==null){
