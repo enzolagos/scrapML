@@ -5,8 +5,8 @@ import org.junit.jupiter.api.Test;
 import pages.ElementPage;
 import singletonSession.Session;
 
-import static utils.CsvWriter.createCsvFile;
-import static utils.CsvWriter.writeDataLineByLine;
+import java.util.Arrays;
+
 
 public class FirstTest extends TestBaseScrapML{
     public ElementPage elementPage = new ElementPage();
