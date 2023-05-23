@@ -1,52 +1,18 @@
 package cleanTest;
 
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
-import pages.ElementPage;
 import singletonSession.Session;
-
-import java.util.Arrays;
 
 import static utils.ScreenShot.captureScreenshot;
 
 
-public class FirstTest extends TestBaseScrapML{
-    public ElementPage elementPage = new ElementPage();
+public class NeumaticosTest extends TestBaseScrapML{
     String title;
     String price;
     String caracteristics;
     String description;
     String category;
     String url;
-
-    @Test
-    public void verifyItRuns() throws InterruptedException{
-        System.out.println("hola");
-        url = Session.getInstance().getBrowser().getCurrentUrl();
-        title = elementPage.titleLabel.getText();
-
-        StringBuilder dataTablas = new StringBuilder();
-        Thread.sleep(1000);
-        elementPage.closeAd.click();
-        Thread.sleep(1000);
-        elementPage.closeCookies.click();
-        Thread.sleep(1000);
-        elementPage.verMasCaracteristicas.click();
-        Thread.sleep(1000 * elementPage.tables.getAll().size());
-        for(int i = 1; i <= elementPage.tables.getAll().size();i++){
-            dataTablas.append(elementPage.getTableControl(i).getText()).append("|");
-        }
-        caracteristics = dataTablas.toString().replaceAll("\n", " ");
-        Thread.sleep(2000);
-
-        description = elementPage.descripcion.getText().replaceAll("\n"," ");
-        price = elementPage.precio.getAttribute("content");
-
-        String[] csvLine = {title,caracteristics,description,price,url};
-        data.add(csvLine);
-        //System.out.println(Arrays.toString(csvLine));
-
-    }
 
     @Test
     public void testScrapNeumaticos() throws InterruptedException {

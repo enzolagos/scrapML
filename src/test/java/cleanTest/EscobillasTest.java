@@ -1,14 +1,11 @@
 package cleanTest;
 
 import org.junit.jupiter.api.Test;
-import pages.ElementPage;
 import singletonSession.Session;
-
-import java.util.Arrays;
 
 import static utils.ScreenShot.captureScreenshot;
 
-public class BateriesTest extends TestBaseScrapML{
+public class EscobillasTest extends TestBaseScrapML{
     String title;
     String price;
     String caracteristics;
@@ -17,14 +14,13 @@ public class BateriesTest extends TestBaseScrapML{
     String url;
 
     @Test
-    public void testScrapBatteries() throws InterruptedException{
+    public void testScrapService() throws InterruptedException{
         try{
-            System.out.println("hola");
             Thread.sleep(1000);
             if(homePage.closeNewsBtn.isControlDisplayed())
                 homePage.closeNewsBtn.click();
 
-            navbar.getCategoyButtonByOrder(3).click();
+            navbar.getCategoyButtonByOrder(5).click();
             Thread.sleep(1000);
             if (homePage.closeBestOffersNewsPopUp.isControlDisplayed()) {
                 homePage.closeBestOffersNewsPopUp.click();
@@ -43,13 +39,13 @@ public class BateriesTest extends TestBaseScrapML{
                         Thread.sleep(500);
                         elementPage.closeCookies.click();
                     }
-//                    Thread.sleep(1300);
-                    //elementPage.verMasCaracteristicas.waitClickable();
-                    //elementPage.verMasCaracteristicas.click();
 
                     title = elementPage.titleLabel.getText();
-                    for(int k = 1; k <= elementPage.otrosLiLabel.getAll().size();k++){
-                        dataTablas.append(elementPage.getLabelControl(k).getText()).append("|");
+                    //esto habria que sacarlo
+                    if (elementPage.tables.isControlDisplayed()){
+                        for(int k = 1; k <= elementPage.otrosLiLabel.getAll().size();k++){
+                            dataTablas.append(elementPage.getLabelControl(k).getText()).append("|");
+                        }
                     }
                     caracteristics = dataTablas.toString().replaceAll("\n", " ");
                     description = elementPage.descripcion.getText().replaceAll("\n"," ");
@@ -65,6 +61,4 @@ public class BateriesTest extends TestBaseScrapML{
             // Captura la excepción y toma la captura de pantalla
             captureScreenshot(Session.getInstance().getBrowser(), "screenshot.png");
         }
-
-    }
-}
+}}
