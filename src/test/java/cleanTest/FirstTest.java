@@ -46,34 +46,57 @@ public class FirstTest extends TestBaseScrapML{
 
     }
 
-    /*@Test
-    @Disabled
+    @Test
     public void testScrapNeumaticos() throws InterruptedException {
-        String urlCategoria = Session.getInstance().getBrowser().getCurrentUrl();
+        System.out.println("hola");
+        Thread.sleep(1000);
         homePage.closeNewsBtn.click();
-        homePage.closeNewsBtn2.click();
+        /*if (homePage.closeBestOffersNewsPopUp.isControlDisplayed()) {
+            homePage.closeBestOffersNewsPopUp.click();
+        }*/
         navbar.getCategoyButtonByOrder(1).click();
         Thread.sleep(1000);
-        homePage.closeNewsBtn2.click();
-
+        if (homePage.closeBestOffersNewsPopUp.isControlDisplayed()) {
+            homePage.closeBestOffersNewsPopUp.click();
+        }
+        StringBuilder dataTablas;
+        String urlCategoria = Session.getInstance().getBrowser().getCurrentUrl();
         category = urlCategoria.split("/")[urlCategoria.split("/").length - 1];
-        for (int i = 0; i < 5; i++) {
+
+        for (int i = 0; i < categoryPage.numberOfPages(); i++) {
 
 
-            for (int j = 1; j <= categoryPage.itemsInPage; i++) {
-                categoryPage.findItem(i).click();
-
-                elementPage.closeCookies.click();
+            for (int j = 1; j <= categoryPage.itemsInPage(); j++) {
+                categoryPage.findItem(j).click();
+                dataTablas = new StringBuilder();
+                if (j == 1) {
+                    elementPage.closeAd.click();
+                    Thread.sleep(500);
+                    elementPage.closeCookies.click();
+                }
+                Thread.sleep(1000);
                 elementPage.verMasCaracteristicas.click();
 
                 title = elementPage.titleLabel.getText();
-                caracteristics = elementPage.tables.getAll().get(1).getText();
+                for(int k = 1; k <= elementPage.tables.getAll().size();k++){
+                    dataTablas.append(elementPage.getTableControl(k).getText()).append("|");
+                }
+                caracteristics = dataTablas.toString().replaceAll("\n", " ");
+                description = elementPage.descripcion.getText().replaceAll("\n"," ");
+                price = elementPage.precio.getAttribute("content");
+                url = Session.getInstance().getBrowser().getCurrentUrl();
 
-
-                data.add(new String[] { "Name", "Class", "Marks" });
-
+                data.add(new String[] { title, caracteristics, description, price, url, category});
+                Session.getInstance().getBrowser().navigate().back();
             }
         }
-    }*/
+    }
+    @Test
+    public void testScrapNeumaticos2() throws InterruptedException {
+        /*if (homePage.closeBestOffersNewsPopUp.isControlDisplayed()) {
+            homePage.closeBestOffersNewsPopUp.click();
+        }*/
+        categoryPage.findItem(1).click();
+    }
 
 }
