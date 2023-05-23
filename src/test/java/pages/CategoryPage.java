@@ -6,7 +6,7 @@ import control.Label;
 import org.openqa.selenium.By;
 
 public class CategoryPage {
-    public Button nextPageBtn = new Button(By.xpath("//li[contains(@class,\"andes-pagination__button--next\")]/a"));
+    public Button nextPageBtn = new Button(By.xpath("//li[contains(@class,\"andes-pagination__button--next\")]"));
 
     public Integer itemsInPage(){
         return new Control(By.xpath("//ol[contains(@class,\"ui-search-layout\")]/li")).getAll().size();
