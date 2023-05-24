@@ -64,4 +64,19 @@ public class Control {
         WebDriverWait wait = new WebDriverWait(Session.getInstance().getBrowser(), Duration.ofSeconds(10));
         wait.until(ExpectedConditions.attributeToBe(this.locator,attribute,value));
     }
+
+    public boolean waitExplicitVisibility(int seconds){
+        WebDriverWait wait = new WebDriverWait(Session.getInstance().getBrowser(), Duration.ofSeconds(seconds));
+        try {
+            wait.until(ExpectedConditions.visibilityOf(this.control));
+            System.out.println("El control es visible.");
+            return true;
+
+        } catch (Exception e) {
+            // El control no es visible o el tiempo de espera ha expirado
+            System.out.println("El control no es visible.");
+            return false;
+        }
+
+    }
 }

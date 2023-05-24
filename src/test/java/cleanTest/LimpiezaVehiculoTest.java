@@ -1,7 +1,11 @@
 package cleanTest;
 
 import org.junit.jupiter.api.Test;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
 import singletonSession.Session;
+
+import java.util.List;
 
 import static utils.ScreenShot.captureScreenshot;
 
@@ -16,7 +20,7 @@ public class LimpiezaVehiculoTest extends TestBaseScrapML{
 
     @Test
     public void testScrapLimpieza() throws InterruptedException {
-        try{
+//        try{
             Thread.sleep(1000);
             if(homePage.closeNewsBtn.isControlDisplayed())
                 homePage.closeNewsBtn.click();
@@ -38,7 +42,7 @@ public class LimpiezaVehiculoTest extends TestBaseScrapML{
                 categoryPage.findItem(j).click();
                 dataTablas = new StringBuilder();
 
-                if (elementPage.verMasCaracteristicas.isControlDisplayed()){
+                if (elementPage.verMasCaracteristicas.waitExplicitVisibility(2)){
                     elementPage.verMasCaracteristicas.waitClickable();
                     elementPage.verMasCaracteristicas.click();
                     for(int k = 1; k <= elementPage.tables.getAll().size();k++){
@@ -62,10 +66,10 @@ public class LimpiezaVehiculoTest extends TestBaseScrapML{
                 Session.getInstance().getBrowser().navigate().back();
             }
 
-        } catch (Exception e) {
+       /* } catch (Exception e) {
             // Captura la excepción y toma la captura de pantalla
             System.out.println("ERROR");
             captureScreenshot(Session.getInstance().getBrowser(), "screenshot.png");
-        }
+        }*/
     }
 }
