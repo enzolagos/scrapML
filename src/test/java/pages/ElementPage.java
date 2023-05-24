@@ -21,7 +21,7 @@ public class ElementPage {
     //intento agustin
     public Control labelTablas = new Control(By.xpath("//section//table"));
 
-    /* BATERIAS */
+    public UnorderedList listaOtrosUL = new UnorderedList(By.xpath("//div[@class='ui-pdp-list ui-pdp-specs__list']"));
     public Label otrosLiLabel = new Label(By.xpath("//li[@class='ui-pdp-list__item']"));
     public Label getLabelControl(int i){
         return new Label(By.xpath("(//li[@class='ui-pdp-list__item'])["+i+"]"));

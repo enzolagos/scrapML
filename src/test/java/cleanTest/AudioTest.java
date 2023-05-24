@@ -37,16 +37,22 @@ public class AudioTest extends TestBaseScrapML{
                 categoryPage.findItem(j).click();
                 dataTablas = new StringBuilder();
 
-                if (elementPage.verMasCaracteristicas.isControlDisplayed()){
+                if (elementPage.tables.isControlDisplayed()){
+                    dataTablas.append(elementPage.tables.getText().replaceAll("\n"," ")+ "|");
+
+                }
+                if (elementPage.verMasCaracteristicas.waitExplicitVisibility(2)){
                     elementPage.verMasCaracteristicas.waitClickable();
                     elementPage.verMasCaracteristicas.click();
                     for(int k = 1; k <= elementPage.tables.getAll().size();k++){
                         dataTablas.append(elementPage.getTableControl(k).getText()).append("|");
                     }
                 }
-                else{
-                    for(int k = 1; k <= elementPage.otrosLiLabel.getAll().size();k++){
-                        dataTablas.append(elementPage.getLabelControl(k).getText()).append("|");
+                else {
+                    if(elementPage.listaOtrosUL.isControlDisplayed()){
+                        for(int k = 1; k <= elementPage.otrosLiLabel.getAll().size();k++){
+                            dataTablas.append(elementPage.getLabelControl(k).getText()).append("|");
+                        }
                     }
                 }
 

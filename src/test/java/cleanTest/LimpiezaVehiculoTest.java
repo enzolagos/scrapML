@@ -42,28 +42,24 @@ public class LimpiezaVehiculoTest extends TestBaseScrapML{
             for (int j = 1; j <= categoryPage.itemsInPage(); j++) {
                 categoryPage.findItem(j).click();
                 dataTablas = new StringBuilder();
-                startTime = System.nanoTime();
+
+                if (elementPage.tables.isControlDisplayed()){
+                    dataTablas.append(elementPage.tables.getText().replaceAll("\n"," ")+ "|");
+
+                }
                 if (elementPage.verMasCaracteristicas.waitExplicitVisibility(2)){
-                    endTime = System.nanoTime();
-                    elapsedTime = endTime - startTime;
-                    System.out.println("Tiempo de ejecución para entrar en el if true " + elapsedTime/1000000000 + " segundos");
                     elementPage.verMasCaracteristicas.waitClickable();
                     elementPage.verMasCaracteristicas.click();
                     for(int k = 1; k <= elementPage.tables.getAll().size();k++){
                         dataTablas.append(elementPage.getTableControl(k).getText()).append("|");
                     }
                 }
-                else{
-                    endTime = System.nanoTime();
-                    elapsedTime = endTime - startTime;
-                    System.out.println("Tiempo de ejecución en salir del if para entrar en el else: " + elapsedTime/1000000000 + " segundos");
-                    startTime = System.nanoTime();
-                    for(int k = 1; k <= elementPage.otrosLiLabel.getAll().size();k++){
-                        dataTablas.append(elementPage.getLabelControl(k).getText()).append("|");
+                else {
+                    if(elementPage.listaOtrosUL.isControlDisplayed()){
+                        for(int k = 1; k <= elementPage.otrosLiLabel.getAll().size();k++){
+                            dataTablas.append(elementPage.getLabelControl(k).getText()).append("|");
+                        }
                     }
-                    endTime = System.nanoTime();
-                    elapsedTime = endTime - startTime;
-                    System.out.println("Tiempo de ejecución for de las tablas: " + elapsedTime/1000000000 + " segundos");
                 }
 
                 title = elementPage.titleLabel.getText();

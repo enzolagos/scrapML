@@ -43,10 +43,15 @@ public class EscobillasTest extends TestBaseScrapML{
                     title = elementPage.titleLabel.getText();
                     //esto habria que sacarlo
                     if (elementPage.tables.isControlDisplayed()){
+                        dataTablas.append(elementPage.tables.getText().replaceAll("\n"," ")+ "|");
+
+                    }
+                    if(elementPage.listaOtrosUL.isControlDisplayed()){
                         for(int k = 1; k <= elementPage.otrosLiLabel.getAll().size();k++){
                             dataTablas.append(elementPage.getLabelControl(k).getText()).append("|");
                         }
                     }
+
                     caracteristics = dataTablas.toString().replaceAll("\n", " ");
                     description = elementPage.descripcion.getText().replaceAll("\n"," ");
                     price = elementPage.precio.getAttribute("content");

@@ -21,9 +21,7 @@ public class NeumaticosTest extends TestBaseScrapML{
             Thread.sleep(1000);
             if(homePage.closeNewsBtn.isControlDisplayed())
                 homePage.closeNewsBtn.click();
-            /*if (homePage.closeBestOffersNewsPopUp.isControlDisplayed()) {
-                homePage.closeBestOffersNewsPopUp.click();
-            }*/
+
             navbar.getCategoyButtonByOrder(1).click();
             Thread.sleep(1000);
             if (homePage.closeBestOffersNewsPopUp.isControlDisplayed()) {
