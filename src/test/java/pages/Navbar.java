@@ -5,6 +5,8 @@ import org.openqa.selenium.By;
 
 public class Navbar {
 
+    public Button masCategoriasButton = new Button(By.xpath("//li[@class='nav-list__item nav-list__item--more']/div"));
+    public Button antirrobosButton = new Button(By.xpath("//li/ul/li[last()]"));
 
 
 
