@@ -36,18 +36,31 @@ public class NeumaticosTest extends TestBaseScrapML{
                 for (int j = 1; j <= categoryPage.itemsInPage(); j++) {
                     categoryPage.findItem(j).click();
                     dataTablas = new StringBuilder();
+                    title = elementPage.titleLabel.getText();
+
                     if (j == 1 && i==0) {
                         elementPage.closeAd.click();
                         Thread.sleep(500);
                         elementPage.closeCookies.click();
                     }
 //                    Thread.sleep(1300);
-                    elementPage.verMasCaracteristicas.waitClickable();
-                    elementPage.verMasCaracteristicas.click();
+                    if (elementPage.tables.waitExplicitVisibility(2)){
+                        dataTablas.append(elementPage.tables.getText().replaceAll("\n"," ")+ "|");
 
-                    title = elementPage.titleLabel.getText();
-                    for(int k = 1; k <= elementPage.tables.getAll().size();k++){
-                        dataTablas.append(elementPage.getTableControl(k).getText()).append("|");
+                    }
+                    if (elementPage.verMasCaracteristicas.waitExplicitVisibility(2)){
+                        elementPage.verMasCaracteristicas.waitClickable();
+                        elementPage.verMasCaracteristicas.click();
+                        for(int k = 1; k <= elementPage.tables.getAll().size();k++){
+                            dataTablas.append(elementPage.getTableControl(k).getText()).append("|");
+                        }
+                    }
+                    else {
+                        if(elementPage.listaOtrosUL.waitExplicitVisibility(2)){
+                            for(int k = 1; k <= elementPage.otrosLiLabel.getAll().size();k++){
+                                dataTablas.append(elementPage.getLabelControl(k).getText()).append("|");
+                            }
+                        }
                     }
                     caracteristics = dataTablas.toString().replaceAll("\n", " ");
                     description = elementPage.descripcion.getText().replaceAll("\n"," ");

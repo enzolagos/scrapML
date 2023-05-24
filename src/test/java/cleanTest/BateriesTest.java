@@ -45,19 +45,18 @@ public class BateriesTest extends TestBaseScrapML{
                     }
 
                     title = elementPage.titleLabel.getText();
-                    if (elementPage.tables.isControlDisplayed()){
+                    if (elementPage.tables.waitExplicitVisibility(2)){
                         dataTablas.append(elementPage.tables.getText().replaceAll("\n"," ")+ "|");
 
                     }
                     if (elementPage.verMasCaracteristicas.waitExplicitVisibility(2)){
-                        elementPage.verMasCaracteristicas.waitClickable();
                         elementPage.verMasCaracteristicas.click();
                         for(int k = 1; k <= elementPage.tables.getAll().size();k++){
                             dataTablas.append(elementPage.getTableControl(k).getText()).append("|");
                         }
                     }
                     else {
-                        if(elementPage.listaOtrosUL.isControlDisplayed()){
+                        if(elementPage.listaOtrosUL.waitExplicitVisibility(2)){
                             for(int k = 1; k <= elementPage.otrosLiLabel.getAll().size();k++){
                                 dataTablas.append(elementPage.getLabelControl(k).getText()).append("|");
                             }

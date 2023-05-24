@@ -41,7 +41,7 @@ public class ServiceProgramadoTest extends TestBaseScrapML{
                     }
 
                     title = elementPage.titleLabel.getText();
-                    if (elementPage.tables.isControlDisplayed()){
+                    if (elementPage.tables.waitExplicitVisibility(2)){
                         dataTablas.append(elementPage.tables.getText().replaceAll("\n"," ")+ "|");
 
                     }
@@ -53,7 +53,7 @@ public class ServiceProgramadoTest extends TestBaseScrapML{
                         }
                     }
                     else {
-                        if(elementPage.listaOtrosUL.isControlDisplayed()){
+                        if(elementPage.listaOtrosUL.waitExplicitVisibility(2)){
                             for(int k = 1; k <= elementPage.otrosLiLabel.getAll().size();k++){
                                 dataTablas.append(elementPage.getLabelControl(k).getText()).append("|");
                             }
