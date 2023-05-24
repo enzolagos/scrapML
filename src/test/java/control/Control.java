@@ -1,6 +1,7 @@
 package control;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -9,6 +10,7 @@ import singletonSession.Session;
 import java.time.Duration;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 public class Control {
     protected By locator;
@@ -67,14 +69,18 @@ public class Control {
 
     public boolean waitExplicitVisibility(int seconds){
         WebDriverWait wait = new WebDriverWait(Session.getInstance().getBrowser(), Duration.ofSeconds(seconds));
+        Session.getInstance().getBrowser().manage().timeouts().implicitlyWait(Duration.ofSeconds(2));
         try {
-            wait.until(ExpectedConditions.visibilityOf(this.control));
+//            this.findControl();
+            boolean isVisible = wait.until(ExpectedConditions.visibilityOf(Session.getInstance().getBrowser().findElement(this.locator))).isDisplayed();
             System.out.println("El control es visible.");
+            Session.getInstance().getBrowser().manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
             return true;
 
         } catch (Exception e) {
             // El control no es visible o el tiempo de espera ha expirado
             System.out.println("El control no es visible.");
+            Session.getInstance().getBrowser().manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
             return false;
         }
 

@@ -21,6 +21,7 @@ public class LimpiezaVehiculoTest extends TestBaseScrapML{
     @Test
     public void testScrapLimpieza() throws InterruptedException {
 //        try{
+            long startTime, endTime, elapsedTime;
             Thread.sleep(1000);
             if(homePage.closeNewsBtn.isControlDisplayed())
                 homePage.closeNewsBtn.click();
@@ -41,8 +42,11 @@ public class LimpiezaVehiculoTest extends TestBaseScrapML{
             for (int j = 1; j <= categoryPage.itemsInPage(); j++) {
                 categoryPage.findItem(j).click();
                 dataTablas = new StringBuilder();
-
+                startTime = System.nanoTime();
                 if (elementPage.verMasCaracteristicas.waitExplicitVisibility(2)){
+                    endTime = System.nanoTime();
+                    elapsedTime = endTime - startTime;
+                    System.out.println("Tiempo de ejecución para entrar en el if true " + elapsedTime/1000000000 + " segundos");
                     elementPage.verMasCaracteristicas.waitClickable();
                     elementPage.verMasCaracteristicas.click();
                     for(int k = 1; k <= elementPage.tables.getAll().size();k++){
@@ -50,14 +54,21 @@ public class LimpiezaVehiculoTest extends TestBaseScrapML{
                     }
                 }
                 else{
+                    endTime = System.nanoTime();
+                    elapsedTime = endTime - startTime;
+                    System.out.println("Tiempo de ejecución en salir del if para entrar en el else: " + elapsedTime/1000000000 + " segundos");
+                    startTime = System.nanoTime();
                     for(int k = 1; k <= elementPage.otrosLiLabel.getAll().size();k++){
                         dataTablas.append(elementPage.getLabelControl(k).getText()).append("|");
                     }
+                    endTime = System.nanoTime();
+                    elapsedTime = endTime - startTime;
+                    System.out.println("Tiempo de ejecución for de las tablas: " + elapsedTime/1000000000 + " segundos");
                 }
 
                 title = elementPage.titleLabel.getText();
                 caracteristics = dataTablas.toString().replaceAll("\n", " ");
-                description = elementPage.descripcion.isControlDisplayed() ? elementPage.descripcion.getText().replaceAll("\n"," ") : "";
+                description = elementPage.descripcion.waitExplicitVisibility(2)? elementPage.descripcion.getText().replaceAll("\n"," ") : "";
 //                description = elementPage.descripcion.getText().replaceAll("\n"," ");
                 price = elementPage.precio.getAttribute("content");
                 url = Session.getInstance().getBrowser().getCurrentUrl();
