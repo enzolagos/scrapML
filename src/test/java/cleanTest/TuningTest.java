@@ -5,7 +5,7 @@ import singletonSession.Session;
 
 import static utils.ScreenShot.captureScreenshot;
 
-public class AudioTest extends TestBaseScrapML{
+public class TuningTest extends TestBaseScrapML{
     String title;
     String price;
     String caracteristics;
@@ -14,12 +14,12 @@ public class AudioTest extends TestBaseScrapML{
     String url;
 
     @Test
-    public void testScrapAudio() throws InterruptedException {
+    public void testScrapTuning() throws InterruptedException {
         try{
             Thread.sleep(1000);
             if(homePage.closeNewsBtn.isControlDisplayed())
                 homePage.closeNewsBtn.click();
-            navbar.getCategoyButtonByOrder(4).click();
+            navbar.getCategoyButtonByOrder(6).click();
             Thread.sleep(1000);
             if (homePage.closeBestOffersNewsPopUp.isControlDisplayed()) {
                 homePage.closeBestOffersNewsPopUp.click();
